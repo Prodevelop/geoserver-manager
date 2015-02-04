@@ -165,6 +165,26 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
         add("defaultStyle", defaultStyle);
     }
 
+   /**
+     * @param defaultStyle The style that will be applied if no style is specified.
+     * @throws IllegalArgumentException if defaultStyle is null or empty
+     */
+    public void setDefaultStyle(final String defaultStyle, final String styleWorkspace) throws IllegalArgumentException {
+        if (defaultStyle==null || defaultStyle.isEmpty())
+            throw new IllegalArgumentException("Unable to set an empty or null parameter");
+        final Element child = new Element("name");
+    	child.addContent(defaultStyle);
+    	
+    	final Element child2 = new Element("workspace");
+    	child2.addContent(styleWorkspace);
+    	
+    	final Element parent = new Element("defaultStyle");
+    	parent.addContent(child);
+    	parent.addContent(child2);
+    	
+    	addContent(parent);
+    }
+
     /**
      * @param defaultStyle The style that will be applied if no style is specified.
      * @throws IllegalArgumentException if defaultStyle is null or empty
